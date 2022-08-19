@@ -1,0 +1,17 @@
+syntax = "proto3";
+package dev.array21.drankroulette;
+
+message Game {
+  string id = 1;
+  string name = 2;
+  string outline = 3;
+  string game_rules = 4;
+  optional uint32 min_persons = 5;
+  optional uint32 max_persons = 6;
+  repeated PhysicalRequirment physicalRequirments = 7;
+}
+
+message PhysicalRequirment {
+  string object = 1;
+  uint32 count = 2;
+}

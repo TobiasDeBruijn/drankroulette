@@ -1,0 +1,18 @@
+[package]
+name = "drankroulette"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tracing = "0.1.36"
+tracing-subscriber = "0.3.15"
+
+[dependencies.tokio]
+version = "1.20.1"
+features = ["rt", "rt-multi-thread", "macros"]
+
+[dependencies.dal]
+path = "../dal"
+
+[dependencies.routes]
+path = "../routes"
