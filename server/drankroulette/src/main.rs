@@ -6,7 +6,7 @@ async fn main() {
 
     let cfg = dal::fs::Config::new().await.expect("Handling config");
     let mysql = dal::mysql::Mysql::new(
-        &cfg.mysql.user,
+        &cfg.mysql.host,
         &cfg.mysql.db,
         &cfg.mysql.user,
         &cfg.mysql.password
