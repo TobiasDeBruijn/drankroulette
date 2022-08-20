@@ -1,0 +1,32 @@
+name: drankroulette
+description: Drankroulette
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  shared_preferences: ^2.0.13
+  google_fonts: ^2.3.1
+  http: ^0.13.4
+  protobuf: ^2.0.1
+  url_launcher: ^6.0.20
+  #flutter_launcher_icons:
+  #  git:
+  #    url: https://github.com/Davenchy/flutter_launcher_icons.git
+  #    ref: fixMinSdkParseFlutter2.8
+  new_version: ^0.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
