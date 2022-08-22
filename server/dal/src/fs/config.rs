@@ -8,6 +8,20 @@ use tracing::info;
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct Config {
     pub mysql: MysqlConfig,
+    pub id: IdConfig,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IdConfig {
+    pub game_creator_sys_id: String,
+}
+
+impl Default for IdConfig {
+    fn default() -> Self {
+        Self {
+            game_creator_sys_id: crate::generate_string(64),
+        }
+    }
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]

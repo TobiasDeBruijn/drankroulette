@@ -14,6 +14,7 @@ impl Routable for Router {
     fn configure(cfg: &mut ServiceConfig) {
         cfg.service(web::scope("/game")
             .route("/create", web::post().to(create::create))
+            .route("/list", web::get().to(list::list))
         );
     }
 }

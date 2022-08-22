@@ -48,4 +48,6 @@ pub enum MysqlError {
     Mysql(#[from] mysql_async::Error),
     #[error("{0}")]
     Refinery(#[from] refinery::Error),
+    #[error("Invalid state")]
+    InvalidState,
 }

@@ -4,6 +4,7 @@ import 'package:drankroulette/data/result.dart';
 import 'package:drankroulette/data/token.dart';
 import 'package:drankroulette/local_preferences.dart';
 import 'package:drankroulette/main.dart';
+import 'package:drankroulette/views/base.dart';
 import 'package:drankroulette/views/home.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
     Timer(const Duration(seconds: 2), () async {
       if(await getAppFingerprint() != null) {
         navigateHome();
+        return;
       }
 
       Result tokenResult = await Token.generateToken();
@@ -75,6 +77,6 @@ class _SplashScreenViewState extends State<SplashScreenView> {
 
   void navigateHome() {
     Navigator
-        .pushReplacement(context, MaterialPageRoute(builder: (builder) => const HomeView()));
+        .pushReplacement(context, MaterialPageRoute(builder: (builder) => const BaseView()));
   }
 }

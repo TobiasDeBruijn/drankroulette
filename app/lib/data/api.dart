@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
 
 const String SERVER = kReleaseMode
@@ -9,4 +11,11 @@ Map<String, String> getProtobufHeaders() {
     'Content-Type': 'application/protobuf',
     'Accept': 'application/protobuf'
   };
+}
+
+Map<String, String> getDefaultHeaders(String fingerprint) {
+  Map<String, String> headers = getProtobufHeaders();
+  headers["Authorization"] = fingerprint;
+
+  return headers;
 }

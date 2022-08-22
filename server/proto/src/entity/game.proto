@@ -9,9 +9,18 @@ message Game {
   optional uint32 min_persons = 5;
   optional uint32 max_persons = 6;
   repeated PhysicalRequirment physicalRequirments = 7;
+  optional bool systemProvided = 8;
 }
 
 message PhysicalRequirment {
   string object = 1;
   uint32 count = 2;
+}
+
+// This message is not used in communication
+// However it is used by the mobile client to
+// stored cached games in SharedPreferences.
+message CachedGameStore {
+  repeated Game games = 1;
+  uint64 epochTtl = 2;
 }
