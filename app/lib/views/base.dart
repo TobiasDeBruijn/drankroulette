@@ -1,4 +1,4 @@
-import 'package:drankroulette/views/create_view.dart';
+import 'package:drankroulette/views/create.dart';
 import 'package:drankroulette/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

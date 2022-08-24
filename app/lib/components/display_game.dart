@@ -2,6 +2,7 @@ import 'package:drankroulette/data/proto/entity/game.pb.dart';
 import 'package:drankroulette/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class DisplayGameComponent extends StatelessWidget {
   final Game game;
@@ -13,22 +14,89 @@ class DisplayGameComponent extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            game.name,
-            style: GoogleFonts.oxygen(fontSize: 26),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
           ),
-          Text(
-            game.outline,
-            style: getDefaultTextStyle(),
+          Card(
+            elevation: 2,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.6,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  game.name,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.oxygen(fontSize: 28),
+                ),
+              ),
+            ),
           ),
-          const Divider(thickness: 3),
-          Text(
-            game.gameRules,
-            style: getDefaultTextStyle(),
+          _getGamePhysicalRequirments(),
+          Card(
+            elevation: 2,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.6,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Spelregels",
+                      style: GoogleFonts.oxygen(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      game.gameRules,
+                      style: getDefaultTextStyle(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _getGamePhysicalRequirments() {
+    List<PhysicalRequirment> phyRequirments = game.physicalRequirments;
+    phyRequirments.sort((a, b) => b.count.compareTo(a.count));
+
+    List<Widget> physicalRequirmentIcons = phyRequirments
+      .map((e) => _getSinglePhysicalRequirment(e))
+      .toList();
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: physicalRequirmentIcons,
+    );
+  }
+
+  Widget _getSinglePhysicalRequirment(PhysicalRequirment requirment) {
+    PhysicalRequirmentType? type = fromServerString(requirment.object);
+    IconData iconData;
+    if(type == null) {
+      iconData = MdiIcons.helpCircleOutline;
+    } else {
+      iconData = getPhysicalRequirmentIcon(type);
+    }
+
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+        child: Column(
+          children: [
+            Icon(iconData),
+            Text(
+              requirment.count.toString(),
+              style: GoogleFonts.oxygen(fontSize: 16),
+            ),
+          ],
+        ),
       ),
     );
   }

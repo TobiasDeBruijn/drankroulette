@@ -23,6 +23,7 @@ dependencies:
   #    ref: fixMinSdkParseFlutter2.8
   new_version: ^0.3.0
   fixnum: ^1.0.1
+  material_design_icons_flutter: ^5.0.6996
 
 dev_dependencies:
   flutter_test:

@@ -13,11 +13,11 @@ class GameApi {
     return Result.err();
   }
 
-  static Future<Result<List<Game>>> listGames() async {
+  static Future<Result<List<Game>>> listGames({bool ignoreCache = false}) async {
     log("Getting available games");
 
     List<Game>? maybeCachedGames = await getCachedGames();
-    if(maybeCachedGames != null) {
+    if(maybeCachedGames != null && !ignoreCache) {
       log("Returning games from cache");
       return Result.ok(maybeCachedGames);
     }
