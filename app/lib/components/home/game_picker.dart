@@ -17,16 +17,10 @@ class GamePickerComponent extends StatefulWidget {
 
   void startScrolling(Function(Game) onScrollDone) {
     int randomIdx = _random.nextInt(_games.length);
-    int randomMultiplier = 300 + _random.nextInt(500 - 300);
-
-    // We add one before the multiplication so that
-    // the scroller always scrolls to something. If we didn't
-    // and idx 0 is chosen, it wont scroll anywhere. We then subtract one,
-    // otherwhise the spinner will be off-by-one.
-    int position = (randomIdx + 1) * randomMultiplier - 1;
+    int position = randomIdx + (_games.length * _games.length);
     dev.log("Scrolling to game at random position $position (at idx $randomIdx)}");
 
-    const int duration = 10;
+    const int duration = 3;
     _scrollController.animateToItem(
         position,
         duration: const Duration(seconds: duration),
@@ -35,6 +29,10 @@ class GamePickerComponent extends StatefulWidget {
 
     Timer(const Duration(seconds: duration + 2), () {
       onScrollDone(_games[randomIdx]);
+    });
+
+    Timer(const Duration(seconds: duration + 3), () {
+      _scrollController.jumpToItem(0);
     });
   }
 

@@ -1,3 +1,4 @@
+import 'package:drankroulette/components/physical_requirment.dart';
 import 'package:drankroulette/data/proto/entity/game.pb.dart';
 import 'package:drankroulette/main.dart';
 import 'package:flutter/material.dart';
@@ -66,38 +67,19 @@ class DisplayGameComponent extends StatelessWidget {
     phyRequirments.sort((a, b) => b.count.compareTo(a.count));
 
     List<Widget> physicalRequirmentIcons = phyRequirments
-      .map((e) => _getSinglePhysicalRequirment(e))
+      .map((e) => PhysicalRequirmentComponent(physicalRequirment: e))
+      .map((e) => Card(
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+          child: e,
+        ),
+      ))
       .toList();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: physicalRequirmentIcons,
-    );
-  }
-
-  Widget _getSinglePhysicalRequirment(PhysicalRequirment requirment) {
-    PhysicalRequirmentType? type = fromServerString(requirment.object);
-    IconData iconData;
-    if(type == null) {
-      iconData = MdiIcons.helpCircleOutline;
-    } else {
-      iconData = getPhysicalRequirmentIcon(type);
-    }
-
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
-        child: Column(
-          children: [
-            Icon(iconData),
-            Text(
-              requirment.count.toString(),
-              style: GoogleFonts.oxygen(fontSize: 16),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

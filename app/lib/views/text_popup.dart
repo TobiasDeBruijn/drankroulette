@@ -1,10 +1,13 @@
 import 'package:drankroulette/main.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TextPopupView extends StatelessWidget {
   final String text;
+  final IconData iconData;
+  final Color iconColor;
 
-  const TextPopupView({Key? key, required this.text}): super(key: key);
+  const TextPopupView({Key? key, required this.text, this.iconData = MdiIcons.alertCircle, this.iconColor = Colors.redAccent}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +17,9 @@ class TextPopupView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.error,
-            color: Colors.redAccent,
+          Icon(
+            iconData,
+            color: iconColor,
             size: 40
           ),
           Text(

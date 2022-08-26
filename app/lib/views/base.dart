@@ -1,7 +1,9 @@
 import 'package:drankroulette/views/create.dart';
+import 'package:drankroulette/views/game_catalogue.dart';
 import 'package:drankroulette/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class BaseView extends StatefulWidget {
   const BaseView({Key? key}) : super(key: key);
@@ -16,7 +18,8 @@ class _BaseViewState extends State<BaseView> {
 
   final List<Widget> _pages = const [
     HomeView(),
-    CreateView()
+    GameCatalogueView(),
+    CreateView(),
   ];
 
   final List<BottomNavigationBarItem> _bottomNavigationBarItems = const [
@@ -25,8 +28,12 @@ class _BaseViewState extends State<BaseView> {
       label: 'Home',
     ),
     BottomNavigationBarItem(
+      icon: Icon(MdiIcons.grid),
+      label: "Catalogus",
+    ),
+    BottomNavigationBarItem(
       icon: Icon(Icons.add),
-      label: 'Create'
+      label: 'Create',
     )
   ];
 
