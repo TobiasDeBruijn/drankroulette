@@ -8,8 +8,8 @@ PROTO_FILES := $(shell find ../server/proto/src/ -type f -name \*.proto)
 # Compile protobuf files to Dart
 dart-proto: lib/data/proto/items.pb.dart
 lib/data/proto/items.pb.dart: protoc protoc-gen-dart
-	mkdir -p lib/proto
-	rm -rf lib/proto/*.dart
+	mkdir -p lib/data/proto
+	rm -rf lib/data/proto/*.dart
 	${PROTOC} -I=../server/proto/src/ --dart_out=lib/data/proto/ ${PROTO_FILES} --plugin=${PROTOC_GEN_DART}
 
 
@@ -29,3 +29,5 @@ ${HOME}/.local/bin/protoc:
 protoc-gen-dart: ${HOME}/.pub-cache/bin/protoc-gen-dart
 ${HOME}/.pub-cache/bin/protoc-gen-dart:
 	dart pub global activate protoc_plugin
+	echo 'export PATH="$$PATH":"$$HOME/.pub-cache/bin"' >> ${HOME}/.bashrc
+	export PATH="${PATH}:${HOME}/.pub-cache/bin"
